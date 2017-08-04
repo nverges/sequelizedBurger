@@ -13,22 +13,32 @@ var db = require("../models");
 module.exports = function(app) {
 
     // GET route for getting all of the posts
-    app.get("/api/Burger/", function(req, res) {
-        var query = {};
-        if (req.query.burger_name) {
-            query.burger_name = req.query.burger_name;
-        }
+    app.get("/", function(req, res) {
+        // var query = {};
+        // if (req.query.burger_name) {
+        //     query.burger_name = req.query.burger_name;
+        // }
 
 
-        // Here we add an "include" property to our options in our findAll query
-        // We set the value to an array of the models we want to include in a left outer join
-        // In this case, just db.Author
-        db.Burger.findAll({
-            where: query,
-            include: [db.Burger]
-        }).then(function(dbBurger) {
-            res.json(db.Burger);
-            console.log(`BURGER NAME: ${dbBurger}`);
+        // // Here we add an "include" property to our options in our findAll query
+        // // We set the value to an array of the models we want to include in a left outer join
+        // // In this case, just db.Author
+        // db.Burger.findAll({
+        //     where: query,
+        //     include: [db.Burger]
+        // }).then(function(dbBurger) {
+        //     res.json(db.Burger);
+        //     console.log(`BURGER NAME: ${dbBurger}`);
+        // });
+
+
+        db.Burger.findAll({}).then(function(data) {
+            var hbsObject = {
+                Burger: data
+                    // Burger: data
+            };
+            console.log(hbsObject);
+            res.render("index", hbsObject);
         });
     });
 
