@@ -5,20 +5,19 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: [1]
+                len: [1, 140]
             }
         },
         devoured: {
             type: DataTypes.BOOLEAN,
-            allowNull: true,
-            len: [1]
+            defaultValue: false
         }
     });
 
     // Burger.associate = function(models) {
     //     // We're saying that a Post should belong to an Author
     //     // A Post can't be created without an Author due to the foreign key constraint
-    //     Burger.belongsTo(models.Author, {
+    //     Burger.belongsTo(models.Burger, {
     //         foreignKey: {
     //             allowNull: false
     //         }
